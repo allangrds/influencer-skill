@@ -1,0 +1,10 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "groupings": [
+    {
+      "title": "Content Creation",
+      "description": "Set up a creator's brand profile and generate on-brand, researched content across their networks.",
+      "skills": ["brand-setup", "content-creator"]
+    }
+  ]
+}
