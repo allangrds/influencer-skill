@@ -1,12 +1,14 @@
 ---
 name: brand-setup
 description: Set up or update the creator's brand profile — brand info, communication tone, main and secondary content networks, inspirations, and per-network content structure. Use when the user wants to configure, set up, or edit their creator/branding profile before generating content, or says things like "configure my brand", "set up my content profile", "update my tone/style", "change my networks", "add an inspiration".
+user-invocable: true
 ---
 
 # Brand Setup
 
 Interviews the creator and writes their branding configuration to a fixed set of
-Markdown files at the **project root** (not inside `.claude/`). These files are the
+Markdown files at the **project root** (not inside the agent's config or skills
+directory, e.g. `.claude/` or `.agents/`). These files are the
 single source of truth that the `content-creator` skill reads from later — keep their
 names and locations exactly as below.
 
@@ -47,12 +49,14 @@ to the project root and fill it in — don't invent a different structure or hea
    examples of) how they talk to their audience: tone, humor, pacing, words/phrases to
    avoid. Fill in `templates/COMMUNICATION_STYLE.md` at the project root.
 
-4. **Main network** (`MAIN_INFLUENCE_ZONE.md`) — use `AskUserQuestion` (single-select)
-   with the four network options (`article`, `youtube`, `instagram`, `tiktok`) to pick
-   the ONE primary network. Write the chosen slug into `MAIN_INFLUENCE_ZONE.md`.
+4. **Main network** (`MAIN_INFLUENCE_ZONE.md`) — ask a single-select question (with a
+   structured question tool such as `AskUserQuestion` if your agent has one, otherwise
+   a numbered list in chat) with the four network options (`article`, `youtube`,
+   `instagram`, `tiktok`) to pick the ONE primary network. Write the chosen slug into
+   `MAIN_INFLUENCE_ZONE.md`.
 
-5. **Secondary networks** (`SECONDARY_INFLUENCE_ZONE.md`) — use `AskUserQuestion`
-   (multiSelect, allow selecting none) with the remaining three networks. Write the
+5. **Secondary networks** (`SECONDARY_INFLUENCE_ZONE.md`) — ask a multi-select question
+   the same way (allow selecting none) with the remaining three networks. Write the
    chosen slugs (or an empty list) into `SECONDARY_INFLUENCE_ZONE.md`.
 
 6. **Inspirations** (`INSPIRATIONS.md`) — ask for names and/or links of creators, brands,

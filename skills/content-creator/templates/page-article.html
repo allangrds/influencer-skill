@@ -5,6 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{TOPIC_TITLE}} — article</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Source of a research reference: for the creator only, never recorded or published. */
+  .source-ref { white-space: normal; margin: 0.25rem 0; padding: 0.625rem 0.875rem;
+    background: #fffbeb; border-left: 3px dashed #d97706; border-radius: 0.375rem;
+    font-size: 0.8125rem; line-height: 1.45; color: #78350f; }
+  .source-ref-label { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.05em;
+    text-transform: uppercase; color: #b45309; margin: 0 0 0.25rem; }
+  .source-ref blockquote { font-style: italic; margin: 0 0 0.25rem; }
+  .source-ref p { margin: 0; }
+  .source-ref a { color: #b45309; text-decoration: underline; word-break: break-word; }
+  @media print { .source-ref { display: none; } }
+</style>
+<!--
+  Source block: insert right after each piece of content that uses a research reference.
+  Excerpt is verbatim from RESEARCH_SOURCE.md; label in the content's language.
+  <aside class="source-ref">
+    <p class="source-ref-label">Fonte · só para referência, não entra no conteúdo</p>
+    <blockquote>"…verbatim excerpt…"</blockquote>
+    <p><a href="URL" target="_blank" rel="noopener">Source name — Page title</a></p>
+  </aside>
+-->
 </head>
 <body class="bg-gray-50 text-gray-900">
   <main class="max-w-3xl mx-auto p-8 space-y-10">

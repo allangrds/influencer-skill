@@ -1,0 +1,16 @@
+{
+  "name": "allangrds",
+  "owner": {
+    "name": "Allan Ramos"
+  },
+  "description": "Brand-aware content creation skills, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "influencer",
+      "source": "./",
+      "description": "Turns a creator's brand profile + a topic into on-brand, researched content for every network they use.",
+      "category": "content-creation",
+      "keywords": ["content-creation", "branding", "social-media"]
+    }
+  ]
+}

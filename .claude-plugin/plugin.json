@@ -1,0 +1,15 @@
+{
+  "name": "influencer",
+  "version": "0.1.0",
+  "description": "Claude Code skills that turn a creator's brand profile + a topic into on-brand, researched content (video scripts, captions/hashtags, or an article) for every network the creator uses.",
+  "author": {
+    "name": "Allan Ramos"
+  },
+  "repository": "https://github.com/allangrds/influencer-skill",
+  "license": "MIT",
+  "keywords": ["content-creation", "branding", "social-media", "video-script"],
+  "skills": [
+    "./skills/brand-setup",
+    "./skills/content-creator"
+  ]
+}
