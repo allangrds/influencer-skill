@@ -1,6 +1,6 @@
 {
   "name": "influencer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Claude Code skills that turn a creator's brand profile + a topic into on-brand, researched content (video scripts, captions/hashtags, or an article) for every network the creator uses.",
   "author": {
     "name": "Allan Ramos"

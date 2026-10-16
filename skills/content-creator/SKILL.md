@@ -23,7 +23,7 @@ skill first and stop — do not guess brand info.
 
 ```
 content/<NNN>-<topic-slug>/
-  RESEARCH_SOURCE.md      # sources found (ID + name + title + URL + note + verbatim excerpts)
+  RESEARCH_SOURCE.md      # sources found (ID + name + title + URL + note + verbatim excerpts + full reference + citation key)
   RESEARCH.md             # synthesized findings on the topic, each fact tagged [S#]
   pages/
     <network>.html        # one per configured network, e.g. youtube.html, article.html
@@ -54,6 +54,11 @@ paths before handing them to a subagent.
      such as `AskUserQuestion` if your agent has one, otherwise a numbered list in
      chat) — one option each for Reel / Post / Carousel, with a one-line description of
      what each is — before moving on to research/generation.
+   - **Determine the citation style:** read the `## Citation style` section of
+     `COMMUNICATION_STYLE.md` (e.g. ABNT, APA 7). If it's missing or empty, use ABNT
+     (NBR 6023 + NBR 10520:2023) when the brand's content is in Portuguese and APA 7
+     otherwise, and mention in the final report that it can be set with `brand-setup`.
+     Pass the style to every subagent below.
 
 3. **Research (one subagent).** Launch a single fresh subagent with web search, web
    fetch and file-write access (e.g. a general-purpose agent with WebSearch/WebFetch/
@@ -62,12 +67,26 @@ paths before handing them to a subagent.
 
    > Research the topic "`<topic>`" for a content creator. Find credible, current
    > sources (articles, official docs, reputable news, studies — avoid low-quality
-   > SEO content). Write `content/<NNN>-<slug>/RESEARCH_SOURCE.md` with one entry per
-   > source, each with a stable ID (`S1`, `S2`, ...), the source's name (outlet, author
-   > or organization), the page title, the URL, a one-line note on what it's useful
-   > for, and one or more **verbatim excerpts** — the exact passages, copied word for
-   > word in their original language and wrapped in quotes, that back each fact you
-   > take from that source. Never paraphrase inside an excerpt. Then write
+   > SEO content); prefer the primary source (the study, the law, the author's own
+   > book) over articles about it. Write `content/<NNN>-<slug>/RESEARCH_SOURCE.md` with
+   > one entry per source, each with a stable ID (`S1`, `S2`, ...), the source's name
+   > (outlet, author or organization), the page title, the URL, a one-line note on what
+   > it's useful for, and one or more **verbatim excerpts** — the exact passages, copied
+   > word for word in their original language and wrapped in quotes, that back each
+   > fact you take from that source. Never paraphrase inside an excerpt. Each entry also
+   > gets a `Reference:` line — the complete reference in `<citation style>`, current
+   > edition, for that kind of source (book, journal article, review, news story, web
+   > page, survey/report, law/official document, interview, Bible), every field taken
+   > from the source itself (author, title, outlet, city, date, volume/issue/pages, DOI,
+   > URL and access date when the style asks for them) — and a `Citation:` line with the
+   > in-text citation, e.g. `(Fontes, 2020, p. 5)` in ABNT, which since NBR 10520:2023
+   > writes names in upper and lower case. Never invent a field: leave out what can't be
+   > confirmed and say what's missing. Watch the usual traps: no personal author →
+   > entry by institution or by title; an interview → under the interviewee; same
+   > author and year → `2016a`, `2016b`. If an author's quote or idea was found only in
+   > a secondary source (a review, a summary), add a `Secondary:` line naming the
+   > original work, so the content cites it as the style requires (`apud` in ABNT,
+   > "as cited in" in APA). Then write
    > `content/<NNN>-<slug>/RESEARCH.md`: a synthesized write-up of the topic covering
    > key facts, useful angles/hooks for content, and anything surprising or
    > counter-intuitive worth highlighting. Tag every fact, number, quote or notable
@@ -122,18 +141,60 @@ paths before handing them to a subagent.
      roughly 5–8 slides unless the topic clearly needs more or fewer), then the
      **Caption & Hashtags** block.
    - **For `article`:** fill in the **Article** body only.
-   - **Every network and format — show the source of each reference inline.** Right
-     after each piece of content that uses something from the research (a spoken line,
-     a slide, the visual concept, an article paragraph, the caption), insert a source
-     block using the `<aside class="source-ref">` snippet documented in the template's
-     comment. It holds the verbatim excerpt from `RESEARCH_SOURCE.md` (follow the
-     `[S#]` tag in `RESEARCH.md` to find it), the source's name and title, and the link.
-     Write the block's label in the content's language (e.g. "Fonte · só para
-     referência, não entra no conteúdo"). The block is for the creator to check where
-     something came from. It is not part of what gets recorded or published, and the
-     template styles it so it reads that way. A reference used twice gets a block both
-     times. Content that doesn't come from the research (the creator's own opinion,
-     production cues) gets no block.
+   - **Every network and format — a source box for the creator.** Right after each
+     piece of content that uses something from the research (a spoken line, an
+     on-screen text, a slide, the visual concept, an article paragraph or quote, the
+     caption), insert the source box documented in the template's comment, and put the
+     template's legend once at the top of each section that has boxes. The box is for
+     the creator to fact-check; it is never recorded or published, and the template
+     styles it so it reads that way. Write its label, legend and field names in the
+     content's language — e.g. Portuguese: "📎 Fonte — não faz parte da fala" (video
+     scripts) / "📎 Fonte — não faz parte do texto" (everything else), "O que diz",
+     "⚠️ Atenção", "Conferir"; English: "📎 Source — not part of the script" / "📎 Source
+     — not part of the text", "What it says", "⚠️ Note", "Check". Fields:
+     - **What it says:** a complete paraphrase of what the source says — who, when,
+       where, what, context — with the verbatim excerpt(s) from `RESEARCH_SOURCE.md`
+       (follow the `[S#]` tag in `RESEARCH.md`) in quotes, with the page when there
+       is one.
+     - **⚠️ Note:** only when needed — what in the content is the creator's own
+       paraphrase or illustration rather than the source, what couldn't be
+       confirmed, what comes second-hand, wording changed to match the source.
+     - **Check:** the full reference of every source the box relies on, copied from
+       its `Reference:` line, with the URL as a link inside the reference. This holds
+       for every kind of source, not only books: articles, reviews, studies, surveys,
+       news, official pages, the Bible. Separate several with ` · `.
+
+     A reference used twice gets a box both times. Content that doesn't come from the
+     research (the creator's own opinion, production cues) gets no box. A claim with no
+     source at all is removed, not flagged.
+   - **Every network and format — a formal citation in what gets published**, in the
+     brand's citation style, so anyone can look the source up later:
+     - `article`: an in-text citation after every fact, number, quote or idea taken
+       from a source, copied from its `Citation:` line — in ABNT `(Han, 2024, p. 17)`,
+       `Han (2024, p. 17)`, `(Organização Mundial da Saúde, 2019)`, a second-hand one
+       `(Ash, 2016 apud Challies, 2016)`; in APA `(Han, 2015, p. 17)`, `(Ash, 2016, as
+       cited in Challies, 2016)`. Sacred or classical texts by book, chapter:verse and
+       version, e.g. `— 1 Reis 19:4 (ARA)`. End with a references section (heading in
+       the content's language, e.g. "Referências", "References"): the full reference
+       of every cited source and only those, ordered and formatted as the style says,
+       including the edition of any sacred text quoted.
+     - Video scripts (`youtube`, `tiktok`, instagram reels): the spoken line stays
+       natural ("segundo a OMS…", "according to the WHO…"), but whenever a study,
+       figure, book or quote comes in, add a production cue for an on-screen citation
+       in the content's language, e.g. `[citação na tela, no rodapé: Han (2024, p. 19)
+       — Sociedade do cansaço]` / `[on-screen citation, lower third: Han (2015, p. 19)
+       — The Burnout Society]`. In the `youtube` caption, add the references list: the
+       full reference of every source the script cites, plus a line with any Bible
+       verses cited.
+     - `tiktok` and `instagram` (any format): the citation on screen, on the slide or
+       on the image, plus a caption line pointing to the full list — the YouTube
+       video's description if this topic has a `youtube` page, otherwise the article
+       if it has an `article` page, otherwise a short references list in the caption
+       itself.
+   - **Before writing the page, check it:** every box has a "Check" field with a full
+     reference and its link; in an `article`, every in-text citation has an entry in
+     the references section and every entry is cited; no claim is left without a
+     source.
    - **For `instagram` specifically** (any format): add an HTML comment
      `<!-- instagram-format: reel|post|carousel -->` right after the opening `<body>`
      tag, recording the format used, so future revisions know it without re-asking.
@@ -168,8 +229,10 @@ script for topic 001", "make the Instagram caption punchier"):
 - Only fall back to launching a fresh single-network subagent (step 4 above, for just
   that one network) if the request is big enough to need re-reading the full
   `RESEARCH.md` context (e.g. "redo this with a completely different angle").
-- Keep each `<aside class="source-ref">` block next to the content it backs. If an
-  edit brings in a new fact from the research, add its source block (from
-  `RESEARCH_SOURCE.md`). If an edit removes content that had a source block, remove
-  that block too.
+- Keep each source box next to the content it backs. If an edit brings in a new fact
+  from the research, add its source box (from `RESEARCH_SOURCE.md`) and its formal
+  citation, and add the source to the article's references section or the YouTube
+  description if it isn't there yet. If an edit removes content that had a source box,
+  remove that box too, and drop the source from those lists when nothing else cites
+  it.
 - If the edit changes the page's title, update that topic's entry in `index.html` too.

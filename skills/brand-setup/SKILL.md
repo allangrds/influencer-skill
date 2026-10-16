@@ -1,6 +1,6 @@
 ---
 name: brand-setup
-description: Set up or update the creator's brand profile — brand info, communication tone, main and secondary content networks, inspirations, and per-network content structure. Use when the user wants to configure, set up, or edit their creator/branding profile before generating content, or says things like "configure my brand", "set up my content profile", "update my tone/style", "change my networks", "add an inspiration".
+description: Set up or update the creator's brand profile — brand info, communication tone, citation style, main and secondary content networks, inspirations, and per-network content structure. Use when the user wants to configure, set up, or edit their creator/branding profile before generating content, or says things like "configure my brand", "set up my content profile", "update my tone/style", "change my citation style", "change my networks", "add an inspiration".
 user-invocable: true
 ---
 
@@ -17,7 +17,7 @@ names and locations exactly as below.
 | File | Holds |
 |---|---|
 | `BRANDING.md` | Name, what they do, audience, free-form brand notes |
-| `COMMUNICATION_STYLE.md` | Tone of voice |
+| `COMMUNICATION_STYLE.md` | Tone of voice and citation style |
 | `MAIN_INFLUENCE_ZONE.md` | The single primary network |
 | `SECONDARY_INFLUENCE_ZONE.md` | Zero or more secondary networks |
 | `INSPIRATIONS.md` | Creators/brands/content that inspire this creator |
@@ -39,6 +39,9 @@ to the project root and fill it in — don't invent a different structure or hea
      section from scratch. Jump straight to the relevant step below — don't re-run the
      full interview.
    - If some are missing/empty, only interview for those; skip the ones already filled.
+   - If `COMMUNICATION_STYLE.md` has content but no filled-in `## Citation style`
+     section (it was created before that section existed), ask only the citation
+     question from step 3 and add the section.
 
 2. **Branding** (`BRANDING.md`) — ask, in conversation, for: the brand/creator name,
    what they do, their audience, and anything else they want to share. Copy
@@ -47,7 +50,12 @@ to the project root and fill it in — don't invent a different structure or hea
 
 3. **Communication style** (`COMMUNICATION_STYLE.md`) — ask them to describe (or give
    examples of) how they talk to their audience: tone, humor, pacing, words/phrases to
-   avoid. Fill in `templates/COMMUNICATION_STYLE.md` at the project root.
+   avoid. Then ask which standard to use when citing sources, as a single-select
+   question (structured question tool if available, otherwise a numbered list): ABNT
+   (NBR 6023 + NBR 10520:2023), APA 7, Chicago author-date, or another one they name.
+   Mark as recommended ABNT if they create content in Portuguese, APA 7 otherwise. Fill
+   in `templates/COMMUNICATION_STYLE.md` at the project root, writing the chosen
+   standard and its edition under `## Citation style`.
 
 4. **Main network** (`MAIN_INFLUENCE_ZONE.md`) — ask a single-select question (with a
    structured question tool such as `AskUserQuestion` if your agent has one, otherwise

@@ -6,25 +6,23 @@
 <title>{{TOPIC_TITLE}} — {{NETWORK}}</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  /* Source of a research reference: for the creator only, never recorded or published. */
-  .source-ref { white-space: normal; margin: 0.25rem 0; padding: 0.625rem 0.875rem;
-    background: #fffbeb; border-left: 3px dashed #d97706; border-radius: 0.375rem;
-    font-size: 0.8125rem; line-height: 1.45; color: #78350f; }
-  .source-ref-label { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.05em;
-    text-transform: uppercase; color: #b45309; margin: 0 0 0.25rem; }
-  .source-ref blockquote { font-style: italic; margin: 0 0 0.25rem; }
-  .source-ref p { margin: 0; }
-  .source-ref a { color: #b45309; text-decoration: underline; word-break: break-word; }
+  /* Source box and legend: for the creator only, never recorded or published. */
   @media print { .source-ref { display: none; } }
 </style>
 <!--
-  Source block: insert right after each piece of content that uses a research reference.
-  Excerpt is verbatim from RESEARCH_SOURCE.md; label in the content's language.
-  <aside class="source-ref">
-    <p class="source-ref-label">Fonte · só para referência, não entra no conteúdo</p>
-    <blockquote>"…verbatim excerpt…"</blockquote>
-    <p><a href="URL" target="_blank" rel="noopener">Source name — Page title</a></p>
-  </aside>
+  Label, legend and field names go in the content's language, e.g.
+    pt: "📎 Fonte — não faz parte do texto" · "O que diz" · "⚠️ Atenção" · "Conferir"
+    en: "📎 Source — not part of the text" · "What it says" · "⚠️ Note" · "Check"
+
+  Legend: once at the top of each section that has source boxes.
+  <p class="source-ref mb-3 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">📎 {LEGEND: the amber boxes are fact-checking notes with what the source says and its full reference; they are not part of the content; remove them before publishing}</p>
+
+  Source box: right after each piece of content that uses the research. Keep it on one
+  line inside whitespace-pre-wrap blocks. The note field only when needed. The check
+  field holds the full reference of every source (book, article, review, study, news,
+  official page, Bible) in the brand's citation style, the URL linked inside it;
+  several separated by " · ".
+  <div class="source-ref not-prose my-3 rounded-md border-l-4 border-amber-500 bg-amber-50 px-4 py-3 text-sm text-amber-950 font-sans not-italic whitespace-normal"><p class="text-xs font-bold uppercase tracking-wide text-amber-700">📎 {LABEL}</p><p class="mt-1"><strong>{WHAT IT SAYS}:</strong> …complete paraphrase, verbatim excerpts in quotes with the page…</p><p class="mt-1"><strong>⚠️ {NOTE}:</strong> …caveats…</p><p class="mt-1"><strong>{CHECK}:</strong> {full reference in the brand's citation style, with the URL as <a href="URL" target="_blank" rel="noopener" class="text-amber-800 underline break-all">URL</a>}</p></div>
 -->
 </head>
 <body class="bg-gray-50 text-gray-900">

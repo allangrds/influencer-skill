@@ -18,14 +18,19 @@ Two skills, used in order:
    and `tiktok`, an article body for `article`, and for `instagram` whichever format you
    pick — Reel (shot-by-shot script), regular feed Post (a visual concept), or Carousel
    (numbered slides) — plus a caption/hashtags block. Every fact or quote taken from
-   the research shows its source inline (original excerpt, source name, link), styled
-   apart from the script so it's clearly not part of what gets recorded or published.
-   Keeps a root `index.html` of everything produced.
+   the research is followed by a source box for the creator (what the source says, the
+   original excerpt, the full reference and link), styled apart from the script so it's
+   clearly not part of what gets recorded or published. The content itself cites its
+   sources formally, in the citation style chosen in `brand-setup` (e.g. ABNT, APA):
+   in-text citations and a references list in the article, on-screen citations in the
+   videos, the full list in the YouTube description. Keeps a root `index.html` of
+   everything produced.
 
 ## Usage
 
 ```
 "configure my brand"          → runs brand-setup
+"change my citation style"    → brand-setup, asks only that
 "create content about <topic>" → runs content-creator
 "create an instagram carousel about <topic>" → content-creator, asks/uses the instagram format
 "change the hook on the YouTube script for topic 001" → content-creator's revision flow
@@ -57,7 +62,7 @@ influencer-skill/
 │  │  └─ templates/                # blank templates for the 6 root config files
 │  └─ content-creator/
 │     ├─ SKILL.md                 # research + generation + revision procedure
-│     └─ templates/                # HTML/Tailwind page + index skeletons (+ source-block style)
+│     └─ templates/                # HTML/Tailwind page + index skeletons (+ source box snippet)
 │        ├─ page-video.html        # youtube, tiktok, instagram reels
 │        ├─ page-instagram-post.html
 │        ├─ page-instagram-carousel.html
@@ -71,7 +76,7 @@ influencer-skill/
 ├─ .gitignore                     # keeps generated/personal files out of git
 │
 ├─ BRANDING.md                    # created by brand-setup: name, what they do, audience
-├─ COMMUNICATION_STYLE.md         # created by brand-setup: tone of voice
+├─ COMMUNICATION_STYLE.md         # created by brand-setup: tone of voice, citation style
 ├─ MAIN_INFLUENCE_ZONE.md         # created by brand-setup: the one primary network
 ├─ SECONDARY_INFLUENCE_ZONE.md    # created by brand-setup: zero or more secondary networks
 ├─ INSPIRATIONS.md                # created by brand-setup: reference creators/brands
@@ -80,7 +85,7 @@ influencer-skill/
 │
 └─ content/
    └─ <NNN>-<topic-slug>/         # one folder per topic, NNN = 001, 002, ...
-      ├─ RESEARCH_SOURCE.md       # sources (S1, S2, …): name, title, URL, verbatim excerpts
+      ├─ RESEARCH_SOURCE.md       # sources (S1, S2, …): name, title, URL, excerpts, full reference
       ├─ RESEARCH.md              # synthesized research, each fact tagged with its [S#]
       └─ pages/
          ├─ youtube.html          # one file per configured network
@@ -146,14 +151,18 @@ claude plugin install influencer@allangrds
   networks' content.
 - `index.html` is never rebuilt from scratch — each `content-creator` run reads it,
   updates only the current topic's section, and leaves the rest untouched.
-- Every fact, number or quote a page takes from the research is followed by an inline
-  source block (`<aside class="source-ref">`): the verbatim excerpt, the source's name,
-  and a link. It's there so the creator can check where something came from. It isn't
-  part of the content, so it's styled apart from the script (amber, dashed border,
-  "reference only" label) and hidden when the page is printed. This works because the
-  research step stores each source with an ID and verbatim excerpts in
-  `RESEARCH_SOURCE.md`, and tags each fact in `RESEARCH.md` with that ID. The page
-  agents follow the tag to the excerpt, so no new research is needed.
+- Sources show up in two layers. Every fact, number or quote a page takes from the
+  research is followed by a source box for the creator: what the source says (with the
+  verbatim excerpt), caveats when needed, and the full reference with its link — for
+  every kind of source, not only books. It isn't part of the content, so it's styled
+  apart from the script (amber box, "not part of the script" label, a legend at the
+  top) and hidden when the page is printed. The published content cites formally, in
+  the brand's citation style: in-text citations and a references section in the
+  article, on-screen citation cues in video scripts, the full list in the YouTube
+  description, and a pointer to it in the other captions. This works because the
+  research step stores each source with an ID, verbatim excerpts, its full reference
+  and its in-text citation in `RESEARCH_SOURCE.md`, and tags each fact in `RESEARCH.md`
+  with that ID. The page agents follow the tag, so no new research is needed.
 
 ## License
 

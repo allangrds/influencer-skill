@@ -54,13 +54,22 @@ add it to `.gitignore` too.
   re-ask. `templates/page-instagram-post.html` and `templates/page-instagram-carousel.html`
   must stay in sync with `SKILL.md`'s format branch (same spirit as the network-slug sync
   rule above).
-- Every research reference used in a page gets an inline `<aside class="source-ref">`
-  block right after it: the verbatim excerpt, the source's name, and a link. It's for
-  the creator to check where something came from and is styled to look different from
-  the script itself (hidden when printed). Every `templates/page-*.html`, including one
-  for any new network, must carry the `.source-ref` style and the snippet comment, and
-  the research step must keep writing source IDs + verbatim excerpts to
-  `RESEARCH_SOURCE.md` so the pages have something to show.
+- Sources show up in two layers. **For the creator:** every research reference used in
+  a page gets an amber source box right after it (what the source says, with the
+  verbatim excerpt; caveats when needed; the full reference of every kind of source,
+  link included), plus a legend at the top of each section. It's styled apart from the
+  content and hidden when printed (`.source-ref`). **For the public:** the content
+  itself cites formally — in-text citations and a references section in `article`,
+  on-screen citation cues in video scripts, the full list in the YouTube description,
+  and a pointer to it in the other captions. Every `templates/page-*.html`, including
+  one for any new network, must carry the `.source-ref` print rule and the legend +
+  box snippet comment, and the research step must keep writing source IDs, verbatim
+  excerpts, a `Reference:` line and a `Citation:` line to `RESEARCH_SOURCE.md` so the
+  pages have something to show.
+- The citation style (ABNT, APA 7, …) lives in the `## Citation style` section of
+  `COMMUNICATION_STYLE.md`. `brand-setup` asks for it and writes it there;
+  `content-creator` reads it, with a default by language when it's missing. Keep the
+  question, the template section and that fallback in sync.
 
 ## SKILL.md frontmatter conventions
 
