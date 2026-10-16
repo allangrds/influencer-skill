@@ -110,39 +110,6 @@ Valid network slugs (used both in the config files and as filenames): `article`,
 See `AGENTS.md` for the canonical maintenance rules (source of truth, gitignore
 invariants, frontmatter conventions) when editing either skill.
 
-## Publishing to skills.sh
-
-skills.sh doesn't have a submission form or approval queue — it indexes public git
-repositories directly. A skill starts showing up on the leaderboard/search automatically,
-via anonymous telemetry, the first time someone runs `npx skills add allangrds/influencer-skill`
-against your repo. So "publishing" just means:
-
-1. **Make this repo public** (GitHub, GitLab, or any git host). The `skills/` top-level
-   folder is exactly the portable layout the `skills` CLI expects, so no repackaging is
-   needed.
-2. **Double-check `.gitignore` did its job** before pushing — run `git status --ignored`
-   and confirm `BRANDING.md`, `content/`, `index.html`, etc. show up as *ignored*, not
-   as untracked files waiting to be added. Never commit those.
-3. **Push it**, then sanity-check discovery from anywhere:
-   ```bash
-   npx skills add allangrds/influencer-skill --list
-   ```
-   This should list `brand-setup` and `content-creator` without installing anything.
-4. Optionally tweak `skills.sh.json` to change how the two skills are grouped/labeled
-   on the marketplace page — it's cosmetic only, not required for indexing.
-5. From here on, every `npx skills add allangrds/influencer-skill` (by you or anyone else) is what
-   feeds the skills.sh leaderboard — there's nothing further to do on your side.
-
-This repo can also be installed as a Claude Code plugin via `claude plugin install`,
-using the manifests in `.claude-plugin/` — an additional install path alongside
-`npx skills add` above. The plugin is named `influencer`, which is what gives its skills
-the `/influencer:<skill>` namespace. To install it:
-
-```bash
-claude plugin marketplace add allangrds/influencer-skill
-claude plugin install influencer@allangrds
-```
-
 ## Design notes
 
 - Each network's page is generated in isolation (its own subagent, in parallel, where
